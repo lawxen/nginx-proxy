@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  ### nginx Container ############################################
+  proxy:
+    image: nginx
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./certs/:/etc/nginx/certs/
+    container_name: proxy
+    #restart: always
+    ports:
+      - 443:443
+      - 80:80
+    networks:
+      - proxy
+
+### Network ###############################################
+networks:
+  proxy:
+    driver: "bridge"
